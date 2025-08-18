@@ -1,5 +1,4 @@
 # tecweb
-## Repositorio Tecnologias Web
 
 ***Matricula:***
 - 202341121
@@ -9,5 +8,8 @@
 
 ***Materia:***
 - Tecnologias Web
+
+***Periodo:***
+- Otoño 2025
 
 
