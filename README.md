@@ -1,6 +1,6 @@
 # tecweb
 
-***Matricula:***
+***Matrícula:***
 - 202341121
 
 ***Nombre:***
@@ -12,4 +12,5 @@
 ***Periodo:***
 - Otoño 2025
 
-
+***Descripción:***
+Repositorio creado para almacenar y entregar todas las practicas y proyectos del curso
