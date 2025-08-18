@@ -1,2 +1,6 @@
 # tecweb
-Almacenar y entregar de todas las practiicas y proyecyosdel curso
+##**Repositorio Tecnologias Web**
+
+***Nombre:***
+- Luis Angel Ortiz Hipolito
+
