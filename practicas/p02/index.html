@@ -7,8 +7,25 @@
     <style>
         body{
             background-color: #faf2e4;
-            margin: 0 19%;
+            margin: 0 10%;
             font-family: sans-serif;
+            line-height: 1.6; /* interlineado */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .imagen-portada {
+            display: block;
+            margin: 0 auto 30px;
+            max-width: 75%;
+            height: auto;
+            border: 2px solid #57b1dc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1{
@@ -17,20 +34,43 @@
             font-weight: normal;
             text-transform: uppercase;
             border-bottom: 1px solid #57b1dc;
-            margin-top: 30px;
+            margin-top: 0px; 
+            color: #333;
+        }
+
+        .seccion {
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d1633c;
+            border-radius: 5px;
+            border-right: 4px solid #d1633c;
+            border-radius: 5px;
         }
 
         h2{
             color: #d1633c;
-            font-size: 1em;
+            font-size: 1.2em;
+            margin-top: 0px;
+            padding-left: 10px;
+        }
+
+        p {
+            color: #000000;
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        em {
+            font-style: italic;
+            color: #d1633c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="text-align: center;">
-            <img src="imagenes/camino.jpg" alt="Camino a la libertad financiera" style="width: 600px; height: 300px;">
-        </div>
+        <img src="imagenes/camino.jpg" alt="Camino a la libertad financiera" class="imagen-portada">
         <h1>Hábitos de los Ricos</h1>
         <div class="seccion">
             <h2>1. Trabaja para ti mismo/a</h2>
@@ -59,7 +99,7 @@
                 Al contrario de lo que dice el tópico, los que más dinero
                 ganan en cada ámbito no son los que trabajan más horas
                 sino los que trabajan de forma más inteliguente
-                <br>
+                <br><br>
                 El objetivo de tu empresa personal no es trabajar duro,
                 es <em>trabajar el mínimo de horas posibles para desempeñar 
                 tus tareas de forma eficaz</em> y tener el máximo de tiempo 
