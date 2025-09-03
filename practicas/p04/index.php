@@ -5,6 +5,58 @@
     <title>Práctica 4</title>
 </head>
 <body>
+    <h2>Ejercicio 1</h2>
+    <p>Determina cuál de las siguientes variables son válidas y explica por qué:</p>
+    <p>$_myvar,  $_7var,  myvar,  $myvar,  $var7,  $_element1, $house*5</p>
+    <?php
+        //AQUI VA MI CÓDIGO PHP
+        $_myvar;
+        $_7var;
+        //myvar;       // Inválida
+        $myvar;
+        $var7;
+        $_element1;
+        //$house*5;     // Invalida
+        
+        echo '<h4>Respuesta:</h4>';   
+    
+        echo '<ul>';
+        echo '<li>$_myvar es válida porque inicia con guión bajo.</li>';
+        echo '<li>$_7var es válida porque inicia con guión bajo.</li>';
+        echo '<li>myvar es inválida porque no tiene el signo de dolar ($).</li>';
+        echo '<li>$myvar es válida porque inicia con una letra.</li>';
+        echo '<li>$var7 es válida porque inicia con una letra.</li>';
+        echo '<li>$_element1 es válida porque inicia con guión bajo.</li>';
+        echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
+        echo '</ul>';
+    ?>
+
+    <h2>Ejercicio 2</h2>
+    <?php
+    $a = "ManejadorSQL";
+    $b = 'MySQL';
+    $c = &$a;
+
+    echo "<h4>Mostrando el contenido de las variables:</h4>";
+    echo "<ul>";
+    echo "<li>El valor de \$a es: $a</li>";
+    echo "<li>El valor de \$b es: $b</li>";
+    echo "<li>El valor de \$c es: $c</li>";
+    echo "</ul>";
+
+    $a = "PHP server";
+    $b = &$a;
+
+    echo "<h4>Mostrando el contenido de las variables:</h4>";
+    echo "<ul>";
+    echo "<li>El valor de \$a es: $a</li>";
+    echo "<li>El valor de \$b es: $b</li>";
+    echo "<li>El valor de \$c es: $c</li>";
+    echo "</ul>";
+
+    echo "<h4>Descripción del ejercicio:</h4>";
+    echo "<p>En la segunda parte del ejercicio 2 se muestra como el contenido de la variable \$a se cambia a 'PHP server'.<br> Luego \$b se actualiza para referenciar a la variable \$a, entonces ahora \$b tambien tiene el valor 'PHP server'.</p>";
+    ?>
     
 </body>
 </html>
