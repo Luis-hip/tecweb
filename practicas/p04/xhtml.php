@@ -62,6 +62,7 @@
     <h2>Ejercicio 3</h2>
     <p>Mostrando el contenido de cada variable inmediatemente despues de cada asignación:</p>
     <?php
+        unset($a, $b, $c, $z);
         echo "<ul>";
         $a = "PHP5";
         echo "<li>Contenido de \$a es: $a</li>";
@@ -70,13 +71,13 @@
         $b = "5a version de PHP";
         echo "<li>Contenido de \$b es: </li>";
         var_dump($b);
-        $c = (int)$b*10;
+        @$c = $b * 10;
         echo "<li>Contenido de \$c es: </li>";
         var_dump($c);
         $a .= $b;
         echo "<li>Contenido de \$a es: </li>";
         var_dump($a);
-        $b *= $c;
+        @$b *= $c;
         echo "<li>Contenido de \$b es: </li>";
         var_dump($b);
         $z[0] = "MySQL";
@@ -87,13 +88,14 @@
     <h2>Ejercicio 4</h2>
     <p>Lee y muestra los valores de las variables anteriores y muestralas con la mastriz $GLOBALS</p>
     <?php
+        /*unset($a, $b, $c, $z);
         $a = "PHP5";
         $z[] = &$a;
-        $b = "5a version de PHP";
+        $b = "5";
         $c = (int)$b * 10;
         $a .= $b;
         $b *= $c;
-        $z[0] = "MySQL";
+        $z[0] = "MySQL";*/
 
         echo "<ul>";
         echo "<li>\$GLOBALS['a']: " . $GLOBALS['a'] . "</li>";
@@ -132,7 +134,7 @@
         echo "<h4>Valores booleanos:</h4>";
         echo "<ul>";
         echo "<li>\$a: </li>";
-        var_dump((bool)$a);  
+        var_dump((bool)$a);
         echo "<li>\$b: </li>";
         var_dump((bool)$b);  
         echo "<li>\$c: </li>";
