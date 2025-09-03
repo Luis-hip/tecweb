@@ -32,6 +32,7 @@
     ?>
 
     <h2>Ejercicio 2</h2>
+    <p>Proporcionar los valores de $a, $b y $c:</p>
     <?php
     $a = "ManejadorSQL";
     $b = 'MySQL';
@@ -57,6 +58,31 @@
     echo "<h4>Descripción del ejercicio:</h4>";
     echo "<p>En la segunda parte del ejercicio 2 se muestra como el contenido de la variable \$a se cambia a 'PHP server'.<br> Luego \$b se actualiza para referenciar a la variable \$a, entonces ahora \$b tambien tiene el valor 'PHP server'.</p>";
     ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>Mostrando el contenido de cada variable inmediatemente despues de cada asignación:</p>
+    <?php
+        echo "<ul>";
+        $a = "PHP5";
+        echo "<li>Contenido de \$a es: $a</li>";
+        $z[] = &$a;
+        echo "<li>Contenido de \$z es: " .print_r($z, true). "</li>";
+        $b = "5a version de PHP";
+        echo "<li>Contenido de \$b es: </li>";
+        var_dump($b);
+        $c = (int)$b*10;
+        echo "<li>Contenido de \$c es: </li>";
+        var_dump($c);
+        $a .= $b;
+        echo "<li>Contenido de \$a es: </li>";
+        var_dump($a);
+        $b *= $c;
+        echo "<li>Contenido de \$b es: </li>";
+        var_dump($b);
+        $z[0] = "MySQL";
+        echo "<li>Contenido de \$z es: " .print_r($z, true). "</li>";
+    ?>
+
     
 </body>
 </html>
