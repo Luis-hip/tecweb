@@ -81,8 +81,28 @@
         var_dump($b);
         $z[0] = "MySQL";
         echo "<li>Contenido de \$z es: " .print_r($z, true). "</li>";
+        echo "</ul>";
     ?>
 
-    
+    <h2>Ejercicio 4</h2>
+    <p>Lee y muestra los valores de las variables anteriores y muestralas con la mastriz $GLOBALS</p>
+    <?php
+        $a = "PHP5";
+        $z[] = &$a;
+        $b = "5a version de PHP";
+        $c = (int)$b * 10;
+        $a .= $b;
+        $b *= $c;
+        $z[0] = "MySQL";
+
+        echo "<ul>";
+        echo "<li>\$GLOBALS['a']: " . $GLOBALS['a'] . "</li>";
+        echo "<li>\$GLOBALS['b']: " . $GLOBALS['b'] . "</li>";
+        echo "<li>\$GLOBALS['c']: " . $GLOBALS['c'] . "</li>";
+        echo "<li>\$GLOBALS['z']: </li>";
+        print_r($GLOBALS['z']);
+        echo "</ul>";
+    ?>
+
 </body>
 </html>
