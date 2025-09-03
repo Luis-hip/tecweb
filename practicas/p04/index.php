@@ -118,5 +118,40 @@
         echo "<li>\$c: $c</li>";
         echo "</ul>";
     ?>
+
+    <h2>Ejercicio 6</h2>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f:</p>
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+
+        echo "<h4>Valores booleanos:</h4>";
+        echo "<ul>";
+        echo "<li>\$a: </li>";
+        var_dump((bool)$a);  
+        echo "<li>\$b: </li>";
+        var_dump((bool)$b);  
+        echo "<li>\$c: </li>";
+        var_dump($c);  
+        echo "<li>\$d: </li>";
+        var_dump($d);  
+        echo "<li>\$e: </li>";
+        var_dump($e);  
+        echo "<li>\$f: </li>";
+        var_dump($f);  
+        echo "</ul>";
+
+        echo "<h4>Booleanos convertidos:</h4>";
+        echo "<ul>";
+        echo "c = " . var_export($c, true) . "<br>";
+        echo "e = " . var_export($e, true) . "<br>";
+        echo "f = " . var_export($f, true) . "<br>";
+        echo "</ul>";
+    ?>
+    
 </body>
 </html>
