@@ -104,5 +104,19 @@
         echo "</ul>";
     ?>
 
+    <h2>Ejercicio 5</h2>
+    <p>Dar el valor de las variables $a, $b, $c el final del siguiente script:</p>
+    <?php
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E3";
+        $c = (double) $a;
+
+        echo "<ul>";
+        echo "<li>\$a: $a</li>";
+        echo "<li>\$b: $b</li>";
+        echo "<li>\$c: $c</li>";
+        echo "</ul>";
+    ?>
 </body>
 </html>
