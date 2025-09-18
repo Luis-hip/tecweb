@@ -57,6 +57,22 @@
         } while ($num % $numero != 0);
         return $num;
    }
+
+   function arregloLetras(){
+        $arreglo = [];
+        for($i=97; $i<=122; $i++){
+            $arreglo[$i] = chr($i);
+        }
+        return $arreglo;
+   }
+
+   function evaluarPersona($edad, $sexo){
+        if($sexo == "Femenino" && $edad >= 18 && $edad <= 35){
+            return "Bienvenida, usted está en el rango de edad aceptado";
+        } else {
+            return "Lo sentimos, no cumple los requisitos de edad y sexo";
+        }
+   }
 ?>
 
 
