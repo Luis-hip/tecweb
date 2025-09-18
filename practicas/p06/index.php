@@ -11,10 +11,14 @@
     <h2>Ejercicio 1</h2>
     <p>Escribir programa para comprobar si un número es un múltiplo de 5 y 7</p>
     <?php 
-        if (isset($_GET['numero'])) {
             $numero = $_GET['numero'];
             echo esMultiploDe5y7($numero);
-        }
+    ?>
+
+    <h2>Ejercicio 2</h2>
+    <p>Crear un programa para la generación repetitiva de 3 números aleatorios hasta obtener un secuencia compuesta por: impar, par, impar.</p>
+    <?php
+        secuenciaImparParImpar();
     ?>
 
     <h2>Ejemplo de POST</h2>
