@@ -17,8 +17,15 @@
 
     <h2>Ejercicio 2</h2>
     <p>Crear un programa para la generación repetitiva de 3 números aleatorios hasta obtener un secuencia compuesta por: impar, par, impar.</p>
+    <?php secuenciaImparParImpar(); ?>
+
+    <h2>Ejercicio 3</h2>
     <?php
-        secuenciaImparParImpar();
+        if(isset($_GET['numero'])){
+            $numero = $_GET['numero'];
+            echo "<p>EL múltiplo (while) de $numero es: ".MultiploWhile($numero)."</p>";
+            echo "<p>EL múltiplo (do-while) de $numero es: ".MultiploDoWhile($numero)."</p>";
+        }
     ?>
 
     <h2>Ejemplo de POST</h2>

@@ -41,6 +41,22 @@
         echo "</pre>";
         echo "<p>Números generados: $numeGenerados en $iteraciones iteraciones.</p>";
    }
+
+   function MultiploWhile($numero){
+        $num = rand(1, 999);
+        while ($num % $numero != 0){
+            $num = rand(1, 999);
+        }
+        return $num;
+   }
+
+   function MultiploDoWhile($numero){
+        $num = rand(1, 999);
+        do {
+            $num = rand(1, 999);
+        } while ($num % $numero != 0);
+        return $num;
+   }
 ?>
 
 
