@@ -59,5 +59,10 @@
         echo "<p>$mensaje</p>";
     }
     ?>
+
+    <h2>Ejercicio 6</h2>
+    <p>Crear en codigo duro un arreglo asociativo que sirva para registrar el parque vehicular de una ciudad.</p>
+    <?php mostrarParqueVehicular($parqueVehicular); ?>
+    
 </body>
 </html>
