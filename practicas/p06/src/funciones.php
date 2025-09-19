@@ -33,11 +33,20 @@
 
         $filaValida = [$num1, $num2, $num3];
         
+        echo "<p>
+            <span class='impar'>impar</span>, 
+            <span class='par'>par</span>, 
+            <span class='impar'>impar</span>
+        </p>"; 
+        echo "<br>";
+
         echo "<pre>";
         foreach($filasPrueba as $fila) {
             printf("%3d %3d %3d\n", $fila[0], $fila[1], $fila[2]);
         }
-        printf($filaValida[0]." ".$filaValida[1]." ".$filaValida[2]);
+        printf(
+            "<span class='impar'>%3d</span> <span class='par'>%3d</span> <span class='impar'>%3d</span>\n",
+            $filaValida[0], $filaValida[1], $filaValida[2]);
         echo "</pre>";
         echo "<p>Números generados: $numeGenerados en $iteraciones iteraciones.</p>";
    }
@@ -258,7 +267,7 @@
     ];
 
     function mostrarParqueVehicular($parqueVehicular){
-        echo "<h2>Parque Vehicular</h2>";
+        echo "<br><h2><strong>Parque Vehicular</strong></h2>";
         echo "<table border='1' cellpadding='5' cellspacing='0'>";
         echo "<thead>
                 <tr>
