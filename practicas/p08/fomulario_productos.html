@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Producto</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar nuevo producto</h1>
+        <form id="formularioProducto" action="set_producto_v2.php" method="POST">
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" id="nombre" name="nombre" maxlength="100" required>
+            <label for="marca">Marca del producto:</label>
+            <input type="text" id="marca" name="marca" maxlength="25" required>
+            <label for="modelo">Modelo del producto:</label>
+            <input type="text" id="modelo" name="modelo" maxlength="25" required>
+            <label for="precio">Precio del producto:</label>
+            <input type="number" id="precio" name="precio" step="0.01" required>
+            <label for="detalles">Detalles del producto:</label>
+            <textarea id="detalles" name="detalles" maxlength="255" required></textarea>
+            <label for="imagen">URL de la imagen del producto:</label>
+            <input type="text" id="imagen" name="imagen" maxlength="100" required>
+            <button type="submit">Agregar Producto</button>
+        </form>
+    </div>
+</body>
+</html>
