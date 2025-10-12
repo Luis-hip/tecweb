@@ -2,15 +2,6 @@
 	//verificicamos si estamos editando un producto
 	$modo_edicion = isset($_GET['id']);
 
-	$id = htmlspecialchars($_GET['id'] ?? '');
-	$nombre = htmlspecialchars($_GET['nombre'] ?? '');
-	$marca = htmlspecialchars($_GET['marca'] ?? '');
-	$modelo = htmlspecialchars($_GET['modelo'] ?? '');
-	$precio = htmlspecialchars($_GET['precio'] ?? '');
-	$detalles = htmlspecialchars($_GET['detalles'] ?? '');
-	$unidades = htmlspecialchars($_GET['unidades'] ?? '');
-	$imagen = htmlspecialchars($_GET['imagen'] ?? '');
-
     if($modo_edicion){
         $title = "Editar Producto";
         $accion = "update_producto.php";
@@ -21,6 +12,17 @@
         $accion = "set_producto_v2.php";
         $TextoBoton = "Agregar Producto";
     }
+
+	$id = htmlspecialchars($_GET['id'] ?? '');
+	$nombre = htmlspecialchars($_GET['nombre'] ?? '');
+	$marca = htmlspecialchars($_GET['marca'] ?? '');
+	$modelo = htmlspecialchars($_GET['modelo'] ?? '');
+	$precio = htmlspecialchars($_GET['precio'] ?? '');
+	$detalles = htmlspecialchars($_GET['detalles'] ?? '');
+	$unidades = htmlspecialchars($_GET['unidades'] ?? '');
+	$imagen = htmlspecialchars($_GET['imagen'] ?? '');
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +109,7 @@
                     if(imagenInput === ""){ //Asignnamos imagen por defecto si no se proporciona ninguna
                         imagenInput.value = "img/imagen.png";
                     }
+
                     form.submit(); // Enviar el formulario si no hay errores
                 }
             });

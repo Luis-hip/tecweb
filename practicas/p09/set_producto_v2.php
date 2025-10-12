@@ -40,7 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<li>unidades:' . $unidades . '</li>';
             echo '<img src="' . $imagen . '" alt="Imagen del producto" width="200" style="max-width: 100%;">';
             echo '</ul>';
-            echo '<a href="http://localhost/tecweb/practicas/p09/formulario_productos_v2.php">Agregar otro producto</a>';
+           echo '<div class="mt-4">
+                    <a href="get_productos_vigentes_v2.php" class="btn btn-primary">Ver Productos Vigentes</a>
+                    <a href="get_productos_XHTML_v2.php" class="btn btn-secondary">Ver Productos por Tope</a>
+                    <a href="formulario_productos_v2.php" class="btn btn-success">Agregar Otro Producto</a>
+                </div>';
         } else {
             echo '<h1>El Producto no pudo ser insertado</h1>';
             echo '<a href="http://localhost/tecweb/practicas/p09/formulario_productos_v2.php">Intentar nuevamente</a>';
