@@ -58,7 +58,7 @@ select{
 
 /* Estilos para la tabla de productos vigentes */
 .container-large{
-    max-width: 1050px;
+    max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -111,6 +111,16 @@ h1{
     border-color: #ffeeba;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #E91E63;
+    border-color: #FF5722;
+}
+
 /* Estilos para mensajes de error */
 .error-messages {
     background-color: #f8d7da;
@@ -125,3 +135,4 @@ h1{
     margin: 0;
     padding-left: 20px;
 }
+
