@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Producto</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("formularioProducto");
+
+            const errorContainer = document.createElement("div");
+            errorContainer.className = "error-Container";
+            errorContainer.style.display = "none";
+            form.after(errorContainer);
+
+            form.addEventListener("submit", function(event) {
+                let errors = [];
+
+                event.preventDefault(); // Evitar el envío del formulario por defecto
+                const nombre = document.getElementById("nombre").value.trim();
+                const marca = document.getElementById("marca").value;   
+                const modelo = document.getElementById("modelo").value.trim();
+                const precio = parseFloat(document.getElementById("precio").value);
+                const detalles = document.getElementById("detalles").value.trim();
+                const unidades = parseInt(document.getElementById("unidades").value);
+                const imagenInput = document.getElementById("imagen").value.trim();
+
+                // Validaciones 
+                if(nombre === "" ){
+                    errors.push("El nombre del producto no puede estar vacío.");
+                } 
+                else if(nombre.length > 100){
+                    errors.push("El nombre del producto no puede exceder los 100 caracteres.");
+                }
+
+                if(marca === ""){
+                    errors.push("Debe seleccionar una marca.");
+                }
+                
+                if(modelo === ""){
+                    errors.push("El modelo del producto no puede estar vacío.");
+                } 
+                else if(modelo.length > 25){
+                    errors.push("El modelo del producto no puede exceder los 25 caracteres.");
+                }
+
+                if(isNaN(precio)){
+                    errors.push("El precio del producto debe ser un número válido.");
+                } 
+                else if(precio <= 99.9){
+                    errors.push("El precio del prooducto debe ser mayor de 99.9");
+                }
+
+                if(detalles.length > 255){
+                    errors.push("Los detalles del producto no pueden exceder los 255 caracteres.");
+                }
+
+                if(isNaN(unidades)){
+                    errors.push("Las unidades del producto deben ser un número válido.");
+                }
+                else if(unidades === '' || unidades < 0){
+                    if(unidades === ''){
+                        errors.push("Las unidades del producto no pueden estar vacías.");
+                    } else{
+                        errors.push("Las unidades del producto no pueden ser menores a 0");
+                    }
+                }
+                //Fin de las validaciones
+                if(errors.length > 0){
+                    errorContainer.innerHTML = ''; // Limpiar errores previos
+                    const errorList = document.createElement("ul");
+                    errors.forEach(element => {
+                        const lisItem = document.createElement("li");
+                        lisItem.textContent = element;
+                        errorList.appendChild(lisItem);
+                    });
+                    errorContainer.appendChild(errorList);
+                    errorContainer.style.display = "block"; // Mostrar el contenedor de errores
+                } else {
+                    errorContainer.style.display = "none"; // Ocultar el contenedor de errores
+                    if(imagenInput === ""){ //Asignnamos imagen por defecto si no se proporciona ninguna
+                        imagenInput.value = "img/imagen.png";
+                        
+                        form.submit(); // Enviar el formulario si no hay errores
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar nuevo producto</h1>
+        <form id="formularioProducto" action="set_producto_v2.php" method="POST">
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" id="nombre" name="nombre" maxlength="100">
+            <br />
+            <label for="marca">Marca del producto:</label>
+            <select class="selec" name="marca" id="marca">
+                <option value="" disabled selected>Seleccione una marca</option>
+                <option value="Apple">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Huawei">Huawei</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="Oppo">Oppo</option>
+                <option value="Motorola">Motorola</option>
+                <option value="Google">Google</option>
+                <option value="Vivo">Vivo</option>
+                <option value="Realme">Realme</option>
+                <option value="OnePlus">OnePlus</option>
+                <option value="Sony">Sony</option>
+                <option value="LG">LG</option>
+                <option value="Nokia">Nokia</option>
+                <option value="HTC">HTC</option>
+                <option value="ZTE">ZTE</option>
+                <option value="Alcatel">Alcatel</option>
+                <option value="TCL">TCL</option>
+            </select>
+            <br />
+            <label for="modelo">Modelo del producto:</label>
+            <input type="text" id="modelo" name="modelo" maxlength="25">
+            <br />
+            <label for="precio">Precio del producto:</label>
+            <input type="number" id="precio" name="precio" step="0.01">
+            <br />
+            <label for="detalles">Detalles del producto:</label>
+            <textarea id="detalles" name="detalles" placeholder="No más de 255 caracteres de longitud" maxlength="255"></textarea>
+            <br />
+            <label for="unidades">Unidades del producto:</label>
+            <input type="number" id="unidades" name="unidades" min="0" step="1">
+            <br />
+            <label for="imagen">URL de la imagen del producto:</label>
+            <input type="text" id="imagen" name="imagen" maxlength="100">
+            <button type="submit">Agregar Producto</button>
+        </form>
+    </div>
+</body>
+</html>
