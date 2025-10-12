@@ -41,16 +41,20 @@
                         echo "<div class='alert alert-danger' role='alert'>Error al actualizar el producto: " . htmlspecialchars($stmt->error) . "</div>";
                     }
 
-                    // Cerrar la declaración y la conexión
-                    $link->close();
+                    // Cerrar la declaracion
+                    $stmt->close();
                 } else {
                     echo "<div class='alert alert-danger' role='alert'>Error al preparar la consulta: " . htmlspecialchars($link->error) . "</div>";
                 }
+                //cerrar la conexión
                 $link->close();
-
             } else {
                 echo "<div class='alert alert-warning' role='alert'>Faltan datos del formulario. Por favor, complete todos los campos.</div>";
           }
         ?>
+        <div class="mt-4">
+            <a href="get_productos_vigentes_v2.php" class="btn btn-primary">Ver Productos Vigentes</a>
+            <a href="get_productos_XHTML_v2.php" class="btn btn-secondary">Ver Productos por Tope</a>
+        </div>
     </div>
 </body>
