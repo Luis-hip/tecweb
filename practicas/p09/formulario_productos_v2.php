@@ -106,9 +106,8 @@
                     errorContainer.style.display = "none"; // Ocultar el contenedor de errores
                     if(imagenInput === ""){ //Asignnamos imagen por defecto si no se proporciona ninguna
                         imagenInput.value = "img/imagen.png";
-                        
-                        form.submit(); // Enviar el formulario si no hay errores
                     }
+                    form.submit(); // Enviar el formulario si no hay errores
                 }
             });
         });
@@ -152,7 +151,7 @@
             <br />
             <label for="imagen">URL de la imagen del producto:</label>
             <input type="text" id="imagen" name="imagen" maxlength="100" value="<?php echo $imagen?>">
-            <button type="submit">Agregar Producto</button>
+            <button type="submit"><?php echo $TextoBoton ?></button>
         </form>
     </div>
 </body>

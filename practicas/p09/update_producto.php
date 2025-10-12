@@ -34,7 +34,7 @@
                 $sql = "UPDATE productos SET nombre = ?, marca = ?, modelo = ?, precio = ?, detalles = ?, unidades = ?, imagen = ? WHERE id = ?";
                 
                 if($stmt = $link->prepare($sql)) {
-                    $stmt->bind_param("sssdisisi", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen, $id);
+                    $stmt->bind_param("sssdsisi", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen, $id);
                     if($stmt->execute()) {
                         echo "<div class='alert alert-success' role='alert'>Producto actualizado exitosamente.</div>";
                     } else {
