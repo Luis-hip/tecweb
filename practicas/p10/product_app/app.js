@@ -60,6 +60,34 @@ function buscarID(e) {
     client.send("id="+id);
 }
 
+function buscarProducto(e) {
+    e.preventDefault();
+
+    // SE OBTIENE EL TEXTO A BUSCAR
+    var search = document.getElementById('search').value;
+
+    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+    var client = getXMLHttpRequest();
+    client.open('POST', './backend/read.php', true);
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    client.onreadystatechange = function () {
+        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
+        if (client.readyState == 4 && client.status == 200) {
+            console.log('[CLIENTE]\n'+client.responseText);
+
+            // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+            let productos = JSON.parse(client.responseText);    // similar a eval('('+client.responseText+')');
+
+            let template = '';
+            // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+            if(productos.length > 0) {
+                
+            }
+        }
+    };
+    client.send("search="+search);
+}
+
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
