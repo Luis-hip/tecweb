@@ -81,7 +81,27 @@ function buscarProducto(e) {
             let template = '';
             // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
             if(productos.length > 0) {
-                
+                productos.forEach( producto => {
+                     // SE CREA UNA lista HTML CON LA DESCRIPCIÓN DEL PRODUCTO
+                    let descripcion = '';
+                        descripcion += '<li>precio: '+producto.precio+'</li>';
+                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                        descripcion += '<li>marca: '+producto.marca+'</li>';
+                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                    
+                    //Se crea una plantilla para crear la(s) fila(s) a insertar en el documento HTML
+                    
+                        template += `
+                            <tr>
+                                <td>${producto.id}</td>
+                                <td>${producto.nombre}</td>
+                                <td><ul>${descripcion}</ul></td>
+                            </tr>
+                        `;
+                });
+                // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
+                document.getElementById("productos").innerHTML = template;
             }
         }
     };
