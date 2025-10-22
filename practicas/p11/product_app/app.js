@@ -149,6 +149,7 @@ function agregarProducto(e) {
 
     // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
     var productoJsonString = document.getElementById('description').value;
+    var nombreProducto = document.getElementById('name').value;
     // SE CONVIERTE EL JSON DE STRING A OBJETO
     var finalJSON = JSON.parse(productoJsonString);
     // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
@@ -162,6 +163,43 @@ function agregarProducto(e) {
  * 
  * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
  */
+    //SE VALIDA QUE EL CAMPO DE DESCRIPCIÓN NO ESTÉ VACÍO
+    if(productoJsonString.trim() == '') {
+        alert('El campo de descripción no puede estar vacío.');
+        return;
+    }
+    var finalJSON;
+    try {
+        finalJSON = JSON.parse(productoJsonString);
+    } catch (error) {
+        alert('Error al parsear el JSON: ' + error.message);
+        return;
+    }
+
+    let errores = [];
+    // VALIDACIONES DE LOS CAMPOS DEL JSON
+    if (!nombreProducto || nombreProducto.trim() === "" || nombreProducto.length > 100) {
+        errores.push('El nombre del producto no debe estar vacío y debe tener menos de 100 caracteres.');
+    }
+    if(finalJSON.precio <= 99.9 || isNaN(finalJSON.precio)) {
+        errores.push('El precio debe ser un número mayor a 99.9');
+    }
+    if(finalJSON.unidades < 0 || isNaN(finalJSON.unidades)) {
+        errores.push('Las unidades deben ser un número mayor o igual a 0');
+    }
+    if(!finalJSON.modelo || finalJSON.modelo === "NA" || finalJSON.modelo.length > 25) {
+        errores.push('El modelo no debe estar vacío y debe tener menos de 25 caracteres.');
+    }
+    if(!finalJSON.marca || finalJSON.marca === "NA" || finalJSON.marca.length > 25) {
+        errores.push('La marca no debe estar vacía y debe tener menos de 25 caracteres.');
+    }
+    if(finalJSON.detalles && finalJSON.detalles.length > 255) {
+        errores.push('Los detalles deben tener 255 caracteres o menos.');
+    }
+    if(errores.length > 0) {
+        alert(errores.join('\n'));
+        return;
+    }
 
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
     var client = getXMLHttpRequest();

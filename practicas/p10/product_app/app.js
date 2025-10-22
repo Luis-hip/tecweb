@@ -150,7 +150,6 @@ function agregarProducto(e) {
     if(finalJSON.detalles && finalJSON.detalles.length > 255) {
         errores.push('Los detalles deben tener 255 caracteres o menos.');
     }
-
     if(errores.length > 0) {
         alert(errores.join('\n'));
         return;
