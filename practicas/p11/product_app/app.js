@@ -15,9 +15,6 @@ function init() {
      */
     var JsonString = JSON.stringify(baseJSON,null,2);
     document.getElementById("description").value = JsonString;
-
-    // SE LISTAN TODOS LOS PRODUCTOS
-    listarProductos();
 }
 
 //INICIO DE CODIGO CON JQUERY
@@ -26,7 +23,7 @@ $(document).ready(function() {
 
     fetchProducts();
 
-    $("#searchForm").keyup(function() {
+    $("#search").keyup(function() {
         if($("#search").val()) {
             let search = $("#search").val();
             $.ajax({
@@ -39,11 +36,11 @@ $(document).ready(function() {
 
                     productos.forEach(producto => {
                         let descripcion = '';
-                        descripcion += '<li>Precio: ' + producto.precio + '</li>';
-                        descripcion += '<li>Unidades: ' + producto.unidades + '</li>';
-                        descripcion += '<li>Modelo: ' + producto.modelo + '</li>';
-                        descripcion += '<li>Marca: ' + producto.marca + '</li>';
-                        descripcion += '<li>Detalles: ' + producto.detalles + '</li>';
+                        descripcion += '<li>Precio: '+producto.precio+'</li>';
+                        descripcion += '<li>Unidades: '+producto.unidades+'</li>';
+                        descripcion += '<li>Modelo: '+producto.modelo+'</li>';
+                        descripcion += '<li>Marca: '+producto.marca+'</li>';
+                        descripcion += '<li>Detalles: '+producto.detalles+'</li>';
 
                         template += `
                             <tr productId="${producto.id}">
@@ -51,9 +48,9 @@ $(document).ready(function() {
                                 <td>${producto.nombre}</td>
                                 <td><ul>${descripcion}</ul></td>
                                 <td>
-                                    <buttun class="product-delete btn btn-danger">
+                                    <button class="product-delete btn btn-danger">
                                         Eliminar
-                                    </buttun>
+                                    </button>
                                 </td>
                             </tr>
                         `;                
@@ -61,10 +58,11 @@ $(document).ready(function() {
 
                     $('#product-results').removeClass('d-none').addClass('d-block');
                     $('#container').html(template_bar);
-                    $('#product').html(template);
+                    $('#products').html(template);
                 }
             });
         } else {
+            //Si la busqueda está vacía, se muestran todos los productos
             $('#product-results').removeClass('d-block').addClass('d-none');
             fetchProducts();
         }
@@ -73,6 +71,7 @@ $(document).ready(function() {
     $('#product-form').submit(function(e) {
         e.preventDefault();
 
+        //Se obtienen los valores
         var productoJsonString = $('#description').val();
         var nombre = $('#name').val();
         var finalJSON;
@@ -90,10 +89,10 @@ $(document).ready(function() {
         }
 
         // Se agrega el nombre al JSON
-        finalJSON['nombre'] = nombreProducto;
+        finalJSON['nombre'] = nombre;
 
         let errores = [];
-        if (!nombreProducto || nombreProducto.trim() === "" || nombreProducto.length > 100) {
+        if (!nombre || nombre.trim() === "" || nombre.length > 100) {
             errores.push('El nombre del producto no debe estar vacío y debe tener menos de 100 caracteres.');
         }
         if(finalJSON.precio <= 99.9 || isNaN(finalJSON.precio)) {
@@ -132,17 +131,78 @@ $(document).ready(function() {
                     <li style="list-style: nome;">message: ${respuesta.message}</li>
                 `;
 
-                $('#response-status').removeClass('d-none').addClass('d-block');
-                $('#container-status').html(template_bar);
+                $('#product-result').removeClass('d-none').addClass('d-block');
+                $('#container').html(template_bar);
 
+                //Cargar la lista de productos actualizada
                 fetchProducts();
 
-                //Se limpia el frormulario
+                //SE LIMMPIA EL FORMULARIO
                 $('#product-form').trigger('reset');
                 init();
             }
         });
     });
 
+    $(document).on('click', '.product-delete', function() {
+        if(confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+            let element = $(this)[0].parentElement.parentElement;
+            let id = $(element).attr('productId');
 
+            $.ajax({
+                url: './backend/product-delete.php?id=' + id,
+                type: 'DELETE',
+                success: function(response) {
+                    let respuesta = JSON.parse(response);
+
+                    //MOSTRAR MENSAJE DE ESTATSUS
+                    let template_bar = "";
+                    template_bar += `
+                        <li style="list-style: none;">status: ${respuesta.status}</li>
+                        <li style="list-style: none;">message: ${respuesta.message}</li>
+                    `;
+                    $('#product-result').removeClass('d-none').addClass('d-block');
+                    $('#container').html(template_bar);
+
+                    //Cargar| la lista de productos actualizada
+                    fetchProducts();
+                }
+            });
+        }
+    });
+
+    //FUNCION PARA CARGAR TODOS LOS PRODUCTOS
+    function fetchProducts() {
+        $.ajax({
+            url: './backend/product-list.php',
+            type: 'GET',
+            success: function(response) {
+                let productos = JSON.parse(response);
+                let template = '';
+                productos.forEach(producto => {
+                    let descripcion = '';
+                    descripcion += '<li>Precio: '+producto.precio+'</li>';
+                    descripcion += '<li>Unidades: '+producto.unidades+'</li>';
+                    descripcion += '<li>Modelo: '+producto.modelo+'</li>';
+                    descripcion += '<li>Marca: '+producto.marca+'</li>';
+                    descripcion += '<li>Detalles: '+producto.detalles+'</li>';
+
+                    template += `
+                        <tr productId="${producto.id}">
+                            <td>${producto.id}</td>
+                            <td>${producto.nombre}</td>
+                            <td><ul>${descripcion}</ul></td>
+                            <td>
+                                <buttun class="product-delete btn btn-danger">
+                                    Eliminar
+                                </buttun>  
+                            </td>
+                        </tr>
+                    `;                
+                });
+
+                $('#product').html(template);
+            }
+        });
+    }
 });
