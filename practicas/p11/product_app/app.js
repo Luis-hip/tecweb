@@ -19,8 +19,10 @@ function init() {
 
 //INICIO DE CODIGO CON JQUERY
 $(document).ready(function() {
-    init();
+    //Variablea para sabaer si se está editando
+    let edit = false;
 
+    init();
     fetchProducts();
 
     $("#search").keyup(function() {
@@ -45,7 +47,9 @@ $(document).ready(function() {
                         template += `
                             <tr productId="${producto.id}">
                                 <td>${producto.id}</td>
-                                <td>${producto.nombre}</td>
+                                <td>
+                                    <a href="#" class="product-item">${producto.nombre}</a>
+                                </td>
                                 <td><ul>${descripcion}</ul></td>
                                 <td>
                                     <button class="product-delete btn btn-danger">
@@ -53,7 +57,8 @@ $(document).ready(function() {
                                     </button>
                                 </td>
                             </tr>
-                        `;                
+                        `; 
+                        template_bar += `<li>${producto.nombre}</li>`;
                     });
 
                     $('#product-results').removeClass('d-none').addClass('d-block');
@@ -115,10 +120,18 @@ $(document).ready(function() {
             return;
         }
 
+        //Se agrega el id al JSON si se estamos editando
+        if(edit === true){
+            finalJSON['id'] = $('#productId').val();
+        }
+
         productoJsonString = JSON.stringify(finalJSON, null, 2);
 
+        //Definimos a que url estamos envindo (agregar o editar)
+        let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+
         $.ajax({
-            url: './backend/product-add.php',
+            url: url,
             type: 'POST',
             data: productoJsonString,
             contentType: 'application/json; charset=utf-8',
@@ -140,10 +153,49 @@ $(document).ready(function() {
                 //SE LIMMPIA EL FORMULARIO
                 $('#product-form').trigger('reset');
                 init();
+
+                //Reseteamos el modo edicion
+                edit = false;
+                $('#productId').val('');
             }
         });
     });
 
+    //EVENTO PARA EDITAR UN PRODUCTO
+    $(document).on('click', '.product-edit, .product-item', function(e) {
+        e.preventDefault();
+
+        let element = $(this)[0].parentElement.parentElement;
+        let id = $(element).attr('productId');
+
+        $.ajax({
+            url: './backend/product-single.php?id=' + id,
+            type: 'GET',
+            success: function(response) {
+                let producto = JSON.parse(response);
+
+                //LLENAR EL FORMULARIO CON LOS DATOS DEL PRODUCTO
+                $('#name').val(producto.nombre);
+                $('#productId').val(producto.id);
+
+                //Creamos el JSON solo con los datos para el textarea
+                let descripcionJSON = {
+                    "precio": parseFloat(producto.precio),
+                    "unidades": parseInt(producto.unidades),
+                    "modelo": producto.modelo,
+                    "marca": producto.marca,
+                    "detalles": producto.detalles,
+                };
+
+                $('#description').val(JSON.stringify(descripcionJSON, null, 2));
+
+                //Activamos el modo edicion
+                edit = true;
+            }
+        });
+    });
+
+    //EVENTO PARA ELIMINAR UN PRODUCTO
     $(document).on('click', '.product-delete', function() {
         if(confirm('¿Estás seguro de que deseas eliminar este producto?')) {
             let element = $(this)[0].parentElement.parentElement;
@@ -190,19 +242,21 @@ $(document).ready(function() {
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
+                            <td>
+                                <a href="#" class="product-item">${producto.nombre}</a>
+                            </td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
-                                <buttun class="product-delete btn btn-danger">
+                                <button class="product-delete btn btn-danger">
                                     Eliminar
-                                </buttun>  
+                                </button>
                             </td>
                         </tr>
                     `;                
                 });
 
-                $('#product').html(template);
+                $('#products').html(template);
             }
         });
-    }
+    }        
 });
