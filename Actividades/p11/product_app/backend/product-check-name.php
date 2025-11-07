@@ -8,13 +8,13 @@
 
     $conexion->set_charset("utf8mb4");
 
-    if(isset($_GET['nombre'])){
-        $nombre = $conexion->real_escape_string($_GET['nombre']);
+    if(isset($_GET['name'])){
+        $name = $conexion->real_escape_string($_GET['name']);
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         //Buscar si existe otro producto con el mismo nombre, que no sea el mismo id (en caso de edicion)
         $query = "SELECT * FROM productos
-                  WHERE nombre = '{$nombre}' 
+                  WHERE nombre = '{$name}' 
                   AND id != {$id}
                   AND eliminado = 0";
 
