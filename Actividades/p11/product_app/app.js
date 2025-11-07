@@ -36,13 +36,15 @@ function setValidacionMensaje(campoId, mensaje, esError) {
 
 function validacionNombre() {
     let nombre = $('#name').val();
+    let msg = 'El nombrre no puede estar vacío.';
     if(nombre === '') {
-        setValidacionMensaje('name', 'El nombre no puede estar vacío.', true);
-        return false;
+        setValidacionMensaje('name', msg, true);
+        return msg;
     }
+    msg = "El nombre no puede exceder los 100 caracteres.";
     if(nombre.length > 100) {
-        setValidacionMensaje('name', 'El nombre no puede exceder los 100 caracteres.', true);
-        return false;
+        setValidacionMensaje('name', msg, true);
+        return msg;
     }
 
     setValidacionMensaje('name', '', false);
@@ -51,27 +53,27 @@ function validacionNombre() {
 
 function validacionMarca() {
     let marca = $('#marca').val();
-    if(marca === '') {
-        setValidacionMensaje('marca', 'Debe seleccionar una marca.', true);
-        return false;
+    let msg = 'Debe seleccionar una marca.';
+    if(marca === '' || marca === null) { 
+        setValidacionMensaje('marca', msg, true);
+        return msg;
     }
-    if(marca.length > 25) {
-        setValidacionMensaje('marca', 'La marca no puede exceder los 25 caracteres.', true);
-        return false;
-    }
+
     setValidacionMensaje('marca', 'Marca válida.', false);
     return true;
 }
 
 function validacionModelo() {
     let modelo = $('#modelo').val();
+    let msg = 'El modelo no puede estar vacío.';
     if(modelo === '') {
-        setValidacionMensaje('modelo', 'El modelo no puede estar vacío.', true);
-        return false;
+        setValidacionMensaje('modelo', msg, true);
+        return msg;
     }
+    msg = 'El modelo no puede exceder los 25 caracteres.';
     if(modelo.length > 25) {
-        setValidacionMensaje('modelo', 'El modelo no puede exceder los 25 caracteres.', true);
-        return false;
+        setValidacionMensaje('modelo', msg, true);
+        return msg;
     }
     setValidacionMensaje('modelo', 'Modelo válido.', false);
     return true;
@@ -79,13 +81,20 @@ function validacionModelo() {
 
 function validacionPrecio() {
     let precio = parseFloat($('#precio').val());
+    let msg = 'El precio no puede estar vacío.';
     if(isNaN(precio)) {
-        setValidacionMensaje('precio', 'El precio debe ser un número válido.', true);
-        return false;
+        setValidacionMensaje('precio', msg, true);
+        return msg;
     }
+    msg = 'El precio debe ser un número válido.';
+    if(isNaN(precio)) {
+        setValidacionMensaje('precio', msg, true);
+        return msg;
+    }
+    msg = 'El precio debe ser mayor a 99.9.';
     if(precio < 99.9) {
-        setValidacionMensaje('precio', 'El precio debe ser mayor a 99.9.', true);
-        return false;
+        setValidacionMensaje('precio', msg, true);
+        return msg;
     }
     setValidacionMensaje('precio', 'Precio válido.', false);
     return true;
@@ -93,22 +102,22 @@ function validacionPrecio() {
 
 function validacionUnidades() {
     let unidadesVal = $('#unidades').val(); // Obtener el valor como cadena
-
+    let msg = 'Las unidades no pueden estar vacías.';
     if(unidadesVal === '') {
-        setValidacionMensaje('unidades', 'Las unidades no pueden estar vacías.', true);
-        return false;
+        setValidacionMensaje('unidades', msg, true);
+        return msg;
     }
 
     let unidadesNum = parseInt(unidadesVal); // Convertir a entero
-
+    msg = 'Las unidades deben ser un número válido.';
     if(isNaN(unidadesNum) ){
-        setValidacionMensaje('unidades', 'Las unidades deben ser un número válido.', true);
-        return false;
+        setValidacionMensaje('unidades', msg, true);
+        return msg;
     }
-
+    msg = 'Las unidades no pueden ser menores a 0.';
     if(unidadesNum < 0) {
-        setValidacionMensaje('unidades', 'Las unidades no pueden ser menores a 0.', true);
-        return false;
+        setValidacionMensaje('unidades', msg, true);
+        return msg;
     }
 
     setValidacionMensaje('unidades', 'Unidades válidas.', false);
@@ -117,10 +126,10 @@ function validacionUnidades() {
 
 function validacionDescripcion() {
     let descripcion = $('#descripcion').val();
-
+    let msg = 'La descripcion no puede exceder los 255 caracteres.';
     if(descripcion.length > 255) {
-        setValidacionMensaje('descripcion', 'La descripción no puede exceder los 255 caracteres.', true);
-        return false;
+        setValidacionMensaje('descripcion', msg, true);
+        return msg;
     }
     setValidacionMensaje('descripcion', '', false);
     return true;
@@ -218,9 +227,15 @@ $(document).ready(function() {
         }
     });
 
+    $('#errorModal').on('hidden.bs.modal', function (e) {
+        //Devuelve el foco al boton principal del formulario
+        $('#product-form button.btn-primary').focus();
+    });
+
     $('#product-form').submit(function(e) {
         e.preventDefault();
-
+        
+        let errores = []; //Arreglo para almacenar mensajes de error
         //Validacion general antes de enviar
         let v1 = validacionNombre();
         let v2 = validacionMarca();
@@ -229,15 +244,32 @@ $(document).ready(function() {
         let v5 = validacionUnidades();
         let v6 = validacionDescripcion();
 
+        // Si la validación no devuelve 'true', es un mensaje de error
+        if (v1 !== true) errores.push(v1);
+        if (v2 !== true) errores.push(v2);
+        if (v3 !== true) errores.push(v3);
+        if (v4 !== true) errores.push(v4);
+        if (v5 !== true) errores.push(v5);
+        if (v6 !== true) errores.push(v6);
+
         //Validacion asincrona de nombre
         if(!asyncValidacionEstatus.isNameOk) {
-            v1 = false; //Si la validacion asincrona falla, marcamos v1 como false
+            errores.push('El nombre del producto ya existe. Por favor elige otro.');
         }
 
-        if(!(v1 ||  v2 || v3 || v4 || v5 || v6)) {
-            alert('Por favor corrija los errores en el formulario antes de enviarlo.');
-            return;
+        if(errores.length > 0) {
+            let errorlistaHtml = '<ul class="list-group">';
+            errores.forEach(function(error) {
+                errorlistaHtml += `<li class="list-group-item list-group-item-danger">${error}</li>`;
+            });
+            errorlistaHtml += '</ul>';
+            //Insertamos el html en el modal
+            $('#errorList').html(errorlistaHtml);
+            //Mostramos el modal
+            $('#errorModal').modal('show');
+            return; //Detenemos el envio
         }
+        
 
         let finalJSON = {
             nombre: $('#name').val(),
@@ -246,7 +278,7 @@ $(document).ready(function() {
             modelo: $('#modelo').val(),
             marca: $('#marca').val(),
             detalles: $('#descripcion').val(),
-            Image: $('#imagen').val() || 'img/default.png' // Valor por defecto si no se proporciona una URL
+            imagen: $('#imagen').val() || 'img/default.png' // Valor por defecto si no se proporciona una URL
         };
 
         //Se agrega el id al JSON si se estamos editando
