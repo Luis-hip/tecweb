@@ -37,6 +37,6 @@
     //Obtenemos los parametros
     $name = $_GET['name'] ?? '';
     $id = $_GET['id'] ?? 0;
-    $prodObj->checkName($name);
+    $prodObj->checkName($name, $id);
     echo $prodObj->getData();
 ?>

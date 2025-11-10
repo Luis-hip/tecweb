@@ -32,10 +32,11 @@
 
     use TECWEB\MYAPI\Products as Products;
     require_once __DIR__ . '/myapi/Products.php';
-    $prodObj = new Products('marketzon');
+    
+    $prodObj = new Products('marketzone');
 
     //Se obtienen los parametros de busqueda
     $search = $_GET['search'] ?? '';
     $prodObj->search($search);
-    echo $prodObj->getData()
+    echo $prodObj->getData();
 ?>

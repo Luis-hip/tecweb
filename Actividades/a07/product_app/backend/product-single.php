@@ -25,11 +25,11 @@
     use TECWEB\MYAPI\Products as Products;
     require_once __DIR__ . '/myapi/Products.php';
 
-    $prodObj = new Products('marketzon');
+    $prodObj = new Products('marketzone');
 
-    //Obtener el ID
+    //Obtener el ID 
     $id = $_GET['id'] ?? 0;
-    $prodObj->single(intval(id));
+    $prodObj->single(intval($id));
     
     echo $prodObj->getData();
 

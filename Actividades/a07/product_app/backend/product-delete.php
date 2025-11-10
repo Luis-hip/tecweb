@@ -26,7 +26,7 @@
     use TECWEB\MYAPI\Products as Products;
     require_once __DIR__ . '/myapi/Products.php';
 
-    $prodObj = new Products('marketzon');
+    $prodObj = new Products('marketzone');
     //Obtener el id
     $id = $_GET['id'] ?? 0;
     $prodObj->delete($id);
