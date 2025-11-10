@@ -1,5 +1,5 @@
 <?php
-    include_once __DIR__.'/database.php';
+    /*include_once __DIR__.'/database.php';
 
     $data = array(
         'exists' => false,
@@ -28,5 +28,15 @@
         $conexion->close();
     }
     //Devolver la respuesta en formato JSON
-    echo json_encode($data, JSON_PRETTY_PRINT);
+    echo json_encode($data, JSON_PRETTY_PRINT);*/
+
+    use TECWEB\MYAPI\Products as Products;
+    require_once __DIR__ . '/myapi/Products.php';
+
+    $prodObj = new Products('marketzon');
+    //Obtenemos los parametros
+    $name = $_GET['name'] ?? '';
+    $id = $_GET['id'] ?? 0;
+    $prodObj->checkName($name);
+    echo $prodObj->getData();
 ?>
