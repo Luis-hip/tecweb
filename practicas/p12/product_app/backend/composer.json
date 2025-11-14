@@ -1,0 +1,11 @@
+{
+    "name": "tecweb/myapi",
+    "description": "API de productos para Marketzone",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "TECWEB\\PRACTICA12\\MYAPI\\": "myapi/"
+        }
+    },
+    "require": {}
+}
