@@ -13,6 +13,7 @@ class Products extends DataBase{
         parent::__construct($user, $pass, $db);
     }
 
+    /*
     public function add($add){
         $this->data = array(
             'status'  => 'error',
@@ -206,6 +207,6 @@ class Products extends DataBase{
 
     public function getData(){
         return json_encode($this->data, JSON_PRETTY_PRINT);
-    }
+    }*/
 }
 ?>
