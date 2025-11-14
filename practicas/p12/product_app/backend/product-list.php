@@ -27,11 +27,10 @@
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
 
-    use TECWEB\MYAPI\Products as Products;
+    use TECWEB\PRACTICA12\MYAPI\Read;
+    require_once __DIR__ . '/vendor/autoload.php';
 
-    require_once __DIR__ . '/myapi/Products.php';
-
-    $prodObj = new Products('marketzone');
+    $prodObj = new Read ('marketzone');
     $prodObj->list();
 
     echo $prodObj->getData();

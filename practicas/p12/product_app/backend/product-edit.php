@@ -33,10 +33,10 @@
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
-    use TECWEB\MYAPI\Products as Products;
-    require_once __DIR__ . '/myapi/Products.php';
+    use TECWEB\PRACTICA12\MYAPI\Update as Update;
+    require_once __DIR__ . '/vendor/autoload.php';
 
-    $prodObj = new Products('marketzone');
+    $prodObj = new Update('marketzone');
     //Obtener el JSON del cuerpo de la solicitud
     $json = file_get_contents('php://input');
     $prodObj->edit($json);

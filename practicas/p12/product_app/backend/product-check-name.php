@@ -30,10 +30,10 @@
     //Devolver la respuesta en formato JSON
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
-    use TECWEB\MYAPI\Products as Products;
-    require_once __DIR__ . '/myapi/Products.php';
+    use TECWEB\PRACTICA12\MYAPI\Read as Read;
+    require_once __DIR__ . '/vendor/autoload.php';
 
-    $prodObj = new Products('marketzon');
+    $prodObj = new Read('marketzon');
     //Obtenemos los parametros
     $name = $_GET['name'] ?? '';
     $id = $_GET['id'] ?? 0;

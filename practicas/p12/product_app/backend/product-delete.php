@@ -23,10 +23,10 @@
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
-    use TECWEB\MYAPI\Products as Products;
-    require_once __DIR__ . '/myapi/Products.php';
+    use TECWEB\PRACTICA12\MYAPI\Delete;
+    require_once __DIR__ . '/vendor/autoload.php';
 
-    $prodObj = new Products('marketzone');
+    $prodObj = new Delete('marketzone');
     //Obtener el id
     $id = $_GET['id'] ?? 0;
     $prodObj->delete($id);
