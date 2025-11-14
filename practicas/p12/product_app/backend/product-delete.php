@@ -23,7 +23,7 @@
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
-    use TECWEB\PRACTICA12\MYAPI\Delete;
+    use TECWEB\PRACTICA12\MYAPI\Delete\Delete;
     require_once __DIR__ . '/vendor/autoload.php';
 
     $prodObj = new Delete('marketzone');

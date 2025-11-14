@@ -33,7 +33,7 @@
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);*/
 
-    use TECWEB\PRACTICA12\MYAPI\Create as Create;
+    use TECWEB\PRACTICA12\MYAPI\Create\Create as Create;
     require_once __DIR__ . '/vendor/autoload.php';
 
     $prodObj = new Create('marketzone');

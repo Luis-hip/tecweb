@@ -1,5 +1,5 @@
 <?php 
-namespace TECWEB\PRACTICA12\MYAPI;
+namespace TECWEB\PRACTICA12\MYAPI\Update;
 
 use TECWEB\PRACTICA12\MYAPI\DataBase as DataBase;
 
