@@ -1,0 +1,9 @@
+{
+    "name": "tecweb/dashboard-recursos",
+    "description": "Backend para el sistema de gestión de recursos",
+    "autoload": {
+        "psr-4": {
+            "TECWEB\\PROYECTO\\": "myapi/"
+        }
+    }
+}
