@@ -1,7 +1,9 @@
 $(document).ready(function() {
+    //Funcion para renderizar recursos
     function render(res){
         let tpl = '';
         const data = typeof res === 'string' ? JSON.parse(res) : res;
+        //Recorrer cada recurso recibido desde el backend
         data.forEach(i => {
             tpl += `
                 <div class="col-md-4">
@@ -17,11 +19,16 @@ $(document).ready(function() {
                     </div>
                 </div>`;
         });
+        // Mostrar el contenido generado en el contenedor publico o mensaje si no hay disponibles
         $('#public_resources-container').html(tpl || '<p class="text-center w-100">No hay recursos disponibles.</p>');
     }
 
-    $.get('./backend/resource-list.php', render);
+    // Cargar recursos al iniciar
+    $.get('./backend/resource-list.php', render); 
+
+    // Buscar recursos al escribir en el campo de busqueda
     $('#public-search').keyup(function() {
+        // Si el input tiene texto, usa la ruta de busqueda; si esta vacio, cargar todos los recursos
         $.get($(this).val() ? './backend/resource-search.php' : './backend/resource-list.php', {search: $(this).val()}, render);
     });
 });
