@@ -9,11 +9,11 @@ class Stats extends Database {
 
     public function getChartsData() {
         // Recursos por Formato
-        $resFormat = $this->conexion->query("SELECT format as label, COUNT(*) as count FROM resources WHERE status=1 GROUP BY format");
+        $resFormat = $this->conexion->query("SELECT formato as label, COUNT(*) as count FROM recursos WHERE status=0 GROUP BY formato");
         $this->data['by_format'] = $resFormat->fetch_all(MYSQLI_ASSOC);
 
         // Recursos por Lenguaje
-        $resLang = $this->conexion->query("SELECT language as label, COUNT(*) as count FROM resources WHERE status=1 GROUP BY language");
+        $resLang = $this->conexion->query("SELECT lenguaje as label, COUNT(*) as count FROM recursos WHERE status=0 GROUP BY lenguaje");
         $this->data['by_language'] = $resLang->fetch_all(MYSQLI_ASSOC);
 
         // Actividad por fecha (Accesos)

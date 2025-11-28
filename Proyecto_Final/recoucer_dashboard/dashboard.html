@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | ResourceHub</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">ResourceHub Admin</a>
+        <button class="btn btn-outline-danger ml-auto" id="logoutBtn">Salir</button>
+    </nav>
+    <div class="container-fluid mt-4">
+        <div class="row mb-5">
+            <div class="col-md-4"><canvas id="chartFormat"></canvas></div>
+            <div class="col-md-4"><canvas id="chartLang"></canvas></div>
+            <div class="col-md-4"><canvas id="chartActivity"></canvas></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Gestión</div>
+                    <div class="card-body">
+                        <form id="resource-form">
+                            <input type="hidden" id="resourceId">
+                            <div class="form-group"><input type="text" id="name" class="form-control" placeholder="Nombre" required></div>
+                            <div class="form-group"><textarea id="description" class="form-control" placeholder="Descripción"></textarea></div>
+                            <div class="form-group"><input type="text" id="url" class="form-control" placeholder="URL" required></div>
+                            <div class="row">
+                                <div class="col"><input type="text" id="format" class="form-control" placeholder="Formato" required></div>
+                                <div class="col"><input type="text" id="language" class="form-control" placeholder="Lenguaje" required></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="search" class="form-control mb-3" placeholder="Buscar...">
+                <table class="table table-hover">
+                    <thead><tr><th>ID</th><th>Nombre</th><th>Lenguaje</th><th>Acción</th></tr></thead>
+                    <tbody id="resources-table"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
