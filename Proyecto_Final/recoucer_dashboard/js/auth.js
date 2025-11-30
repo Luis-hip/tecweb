@@ -27,7 +27,7 @@ $(document).ready(function() {
                     //Redirigir segun el rol del usuario
                     setTimeout(() => window.location.href = r.role === 'admin' ? 'dashboard.html' : 'index.html', 1500);
                 }else { //login fallido
-                    $('#auth-mesage').html(`<div class="alert alert-danger"> ${r.message} </div>`);
+                    $('#auth-message').html(`<div class="alert alert-danger"> ${r.message} </div>`);
                 }
             }
         });
@@ -49,7 +49,7 @@ $(document).ready(function() {
                     $('#auth-message').html('<div class="alert alert-success">Registro exitoso</div>');
                     $('#singup-form').trigger('reset'); //Limpiar formulario
                 }else{
-                    $('#auth-mesage').html(`<div class="alert alert-danger"> ${r.message} </div>`);
+                    $('#auth-message').html(`<div class="alert alert-danger"> ${r.message} </div>`);
                 }
             }
         });
