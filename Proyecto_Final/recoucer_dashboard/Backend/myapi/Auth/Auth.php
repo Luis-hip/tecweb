@@ -36,10 +36,14 @@ class Auth extends Database{
             if(password_verify($password, $user['password'])){
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $user['role'];
-
+                
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $this->conexion->query("INSERT INTO bitacora_accesos (usuario_id, ip_address) VALUES ({$user['id']}, '$ip')");
-                $this->data = ['status' => 'success', 'message' => 'Inicio de sesión exitoso', 'role' => $user['role']];
+                $this->data = ['status' => 'success', 
+                    'message' => 'Inicio de sesión exitoso', 
+                    'role' => $user['role'],
+                    'email' => $user['email']
+                ];
             }else{
                 $this->data = ['status' => 'error', 'message' => 'Contraseña incorrecta'];
             }

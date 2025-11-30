@@ -21,10 +21,10 @@ class Resources extends Database{
         if($check->num_rows == 0){
             $sql = "INSERT INTO recursos (nombre, descripcion, url, formato, lenguaje) VALUES (
                 '{$name}',
-                '{$this->conexion->real_escape_string($obj->descripcion)}',
+                '{$this->conexion->real_escape_string($obj->description)}',
                 '{$this->conexion->real_escape_string($obj->url)}',
-                '{$this->conexion->real_escape_string($obj->formato)}',
-                '{$this->conexion->real_escape_string($obj->lenguaje)}'
+                '{$this->conexion->real_escape_string($obj->format)}',
+                '{$this->conexion->real_escape_string($obj->language)}'
             )";
             $this->data['status'] = $this->conexion->query($sql) ? 'success' : 'error';
             $this->data['message'] = $this->data['status'] == 'success' ? 'Recurso agregado' : 'Error en la Base de Datos';

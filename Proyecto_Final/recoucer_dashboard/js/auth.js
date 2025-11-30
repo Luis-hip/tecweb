@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#login-form').submit(function(e) {
 
         e.preventDefault(); //Evita el envio normal del formulario
-
+        console.log('Click detectado');
         //Obtener datos del formulario de login
         const data = {
             email: $('#login-email').val(), 
@@ -23,6 +23,8 @@ $(document).ready(function() {
                 const r = typeof res === 'string' ? JSON.parse(res) : res;
                 //login exitoso
                 if(r.status === 'success') {
+                    //Guarda el email en el almacenamiento local
+                    localStorage.setItem('user_email', r.email);
                     $('#auth-message').html('<div class="alert alert-success">Entrando...</div>');
                     //Redirigir segun el rol del usuario
                     setTimeout(() => window.location.href = r.role === 'admin' ? 'dashboard.html' : 'index.html', 1500);

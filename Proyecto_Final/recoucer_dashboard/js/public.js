@@ -20,7 +20,7 @@ $(document).ready(function() {
                 </div>`;
         });
         // Mostrar el contenido generado en el contenedor publico o mensaje si no hay disponibles
-        $('#public_resources-container').html(tpl || '<p class="text-center w-100">No hay recursos disponibles.</p>');
+        $('#public-resources-container').html(tpl || '<p class="text-center w-100">No hay recursos disponibles.</p>');
     }
 
     // Cargar recursos al iniciar
@@ -31,4 +31,32 @@ $(document).ready(function() {
         // Si el input tiene texto, usa la ruta de busqueda; si esta vacio, cargar todos los recursos
         $.get($(this).val() ? './backend/resource-search.php' : './backend/resource-list.php', {search: $(this).val()}, render);
     });
+
+    //
+    //Verificar la sesion del usuario
+    const userEmail = localStorage.getItem('user_email');
+    
+    if(userEmail) {
+        //si eciste el email, buscamos el enlace de iniciar sesion y lo reemplazamos por el menu de usuario
+        $('#nav-auth').html(`
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${userEmail}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a>
+                </div>
+            </li>
+        `);
+
+        //Cerrar sesión
+        $('#logoutBtn').click(function(e) {
+            e.preventDefault();
+            $.get('./backend/auth-logout.php', function() {
+                // Borramos el dato del navegador y recargamos
+                localStorage.removeItem('user_email');
+                window.location.reload();
+            });
+        });
+    }
 });
