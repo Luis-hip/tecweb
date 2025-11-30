@@ -9,9 +9,9 @@ $(document).ready(function() {
                 <div class="col-md-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5>${i.name}</h5>
-                            <h6>${i.language} | ${i.format}</h6>
-                            <p>${i.description}</p>
+                            <h5>${i.nombre}</h5>
+                            <h6>${i.lenguaje} | ${i.formato}</h6>
+                            <p>${i.descripcion}</p>
                         </div>
                         <div class="card-footer">
                             <a href="${i.url}" target="_blank" class="btn btn-primary btn-block">Ver</a>

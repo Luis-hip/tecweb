@@ -23,7 +23,7 @@ $(document).ready(function() {
                 const r = typeof res === 'string' ? JSON.parse(res) : res;
                 //login exitoso
                 if(r.status === 'success') {
-                    $('#auth-mesage').html('<div class="alert alert-success">Entrando...</div>');
+                    $('#auth-message').html('<div class="alert alert-success">Entrando...</div>');
                     //Redirigir segun el rol del usuario
                     setTimeout(() => window.location.href = r.role === 'admin' ? 'dashboard.html' : 'index.html', 1500);
                 }else { //login fallido
@@ -46,7 +46,7 @@ $(document).ready(function() {
             success: function(res) { //Manejo de la respuesta del servidor
                 const r = typeof res === 'string' ? JSON.parse(res) : res;
                 if(r.status === 'success') {
-                    $('#auth-mesage').html('<div class="alert alert-success">Registro exitoso</div>');
+                    $('#auth-message').html('<div class="alert alert-success">Registro exitoso</div>');
                     $('#singup-form').trigger('reset'); //Limpiar formulario
                 }else{
                     $('#auth-mesage').html(`<div class="alert alert-danger"> ${r.message} </div>`);

@@ -17,7 +17,7 @@ class Stats extends Database {
         $this->data['by_language'] = $resLang->fetch_all(MYSQLI_ASSOC);
 
         // Actividad por fecha (Accesos)
-        $resActivity = $this->conexion->query("SELECT DATE(login_time) as label, COUNT(*) as count FROM access_log GROUP BY DATE(login_time) ORDER BY label DESC LIMIT 7");
+        $resActivity = $this->conexion->query("SELECT DATE(login_time) as label, COUNT(*) as count FROM bitacora_accesos GROUP BY DATE(login_time) ORDER BY label DESC LIMIT 7");
         $this->data['by_activity'] = $resActivity->fetch_all(MYSQLI_ASSOC);
     }
 }

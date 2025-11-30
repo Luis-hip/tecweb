@@ -1,18 +1,18 @@
 $(document).ready(function() {
     //Cargar Graficas
-    $.get('./backend/starts-get.php', function(res) {
+    $.get('./backend/stats-get.php', function(res) {
         const data = typeof res === 'string' ? JSON.parse(res) : res;
         if(data.by_format){
             // Grafica de formatos de archivo
             new Chart(document.getElementById('chartFormat'), {
                 type: 'doughnut',
-                data:  {labels: data.by_format.map(x=>x.label), datasets: [{data: data.by_format.map(x=>x.count), backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] },
-                options: {title: {display: true, text: 'Formartos'}}
+                data:  {labels: data.by_format.map(x=>x.label), datasets: [{data: data.by_format.map(x=>x.count), backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#E7E9ED', '#71B37C', '#2ecc71', '#e74c3c'] }] },
+                options: {title: {display: true, text: 'Formatos'}}
             });
             // Grafica de lenguajes de programacion
             new Chart(document.getElementById('chartLang'), {
                 type: 'pie',
-                data: {labels: data.by_language.map(x=>x.label), datasets: [{data: data.by_language.map(x=>x.count), backgroundColor: ['#4BC0C0', '#9966FF', '#FF9F40'] }] }
+                data: {labels: data.by_language.map(x=>x.label), datasets: [{data: data.by_language.map(x=>x.count), backgroundColor: ['#4BC0C0', '#9966FF', '#FF9F40', '#4BC0C0', '#9966FF', '#FF9F40', '#E7E9ED', '#71B37C', '#2ecc71', '#e74c3c'] }] }
             });
             // Grafica de actividad de usuarios
             new Chart(document.getElementById('chartActivity'), {
@@ -30,8 +30,8 @@ $(document).ready(function() {
             data.forEach(i => {
                 tpl += `<tr resourceId = "${i.id}">
                     <td>${i.id}</td>
-                    <td>${i.name}</td>
-                    <td>${i.language}</td>
+                    <td>${i.nombre}</td>
+                    <td>${i.lenguaje}</td>
                     <td>
                         <button class="btn btn-sm btn-warning resource-edit">Editar</button>
                         <button class="btn btn-sm btn-danger resource-delete">Eliminar</button>
@@ -76,8 +76,12 @@ $(document).ready(function() {
     $(document).on('click', '.resource-edit', function() {
         $.get('./backend/resource-single.php', {id: $(this).closest('tr').attr('resourceId')}, function(res) {
             const d = typeof res === 'string' ? JSON.parse(res) : res;
-            $('#name').val(d.name); $('#description').val(d.description); $('#url').val(d.url);
-            $('#format').val(d.format); $('#language').val(d.language); $('#resourceId').val(d.id);
+            $('#name').val(d.nombre); 
+            $('#description').val(d.descripcion); 
+            $('#url').val(d.url);
+            $('#format').val(d.formato); 
+            $('#language').val(d.lenguaje); 
+            $('#resourceId').val(d.id);
         });
     });
 

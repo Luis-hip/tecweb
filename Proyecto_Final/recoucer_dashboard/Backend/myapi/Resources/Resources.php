@@ -17,9 +17,9 @@ class Resources extends Database{
         $obj = json_decode($json);
         $name = $this->conexion->real_escape_string($obj->name);
 
-        $check = $this->conexion->query("SELECT id FROM recursos WHERE name='$name' AND status=0");
+        $check = $this->conexion->query("SELECT id FROM recursos WHERE nombre='$name' AND status=0");
         if($check->num_rows == 0){
-            $sql = "INSERT INTO recursos (name, descripcion, url, formato, lenguaje) VALUES (
+            $sql = "INSERT INTO recursos (nombre, descripcion, url, formato, lenguaje) VALUES (
                 '{$name}',
                 '{$this->conexion->real_escape_string($obj->descripcion)}',
                 '{$this->conexion->real_escape_string($obj->url)}',
@@ -43,12 +43,12 @@ class Resources extends Database{
     public function editar($json) {
         $obj = json_decode($json);
         $id = intval($obj->id);
-        $sql = "UPDATE resources SET 
-            name = '{$this->conexion->real_escape_string($obj->name)}',
-            description = '{$this->conexion->real_escape_string($obj->description)}',
+        $sql = "UPDATE recursos SET 
+            nombre = '{$this->conexion->real_escape_string($obj->name)}',
+            descripcion = '{$this->conexion->real_escape_string($obj->description)}',
             url = '{$this->conexion->real_escape_string($obj->url)}',
-            format = '{$this->conexion->real_escape_string($obj->format)}',
-            language = '{$this->conexion->real_escape_string($obj->language)}'
+            formato = '{$this->conexion->real_escape_string($obj->format)}',
+            lenguaje = '{$this->conexion->real_escape_string($obj->language)}'
             WHERE id = $id";
         
         $this->data['status'] = $this->conexion->query($sql) ? 'success' : 'error';
@@ -57,13 +57,13 @@ class Resources extends Database{
 
     public function single($id) {
         $id = intval($id);
-        $result = $this->conexion->query("SELECT * FROM resources WHERE id = $id");
+        $result = $this->conexion->query("SELECT * FROM recursos WHERE id = $id");
         $this->data = $result->fetch_assoc();
     }
 
     public function buscar($term) {
         $term = $this->conexion->real_escape_string($term);
-        $sql = "SELECT * FROM resources WHERE status=1 AND (name LIKE '%$term%' OR description LIKE '%$term%' OR language LIKE '%$term%')";
+        $sql = "SELECT * FROM recursos WHERE status=0 AND (nombre LIKE '%$term%' OR descripcion LIKE '%$term%' OR lenguaje LIKE '%$term%')";
         $result = $this->conexion->query($sql);
         $this->data = $result->fetch_all(MYSQLI_ASSOC);
     }

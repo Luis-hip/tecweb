@@ -38,7 +38,7 @@ class Auth extends Database{
                 $_SESSION['role'] = $user['role'];
 
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $this->conexion->query("INSERT INTO access_log (user_id, ip_address) VALUES ({$user['id']}, '$ip')");
+                $this->conexion->query("INSERT INTO bitacora_accesos (usuario_id, ip_address) VALUES ({$user['id']}, '$ip')");
                 $this->data = ['status' => 'success', 'message' => 'Inicio de sesión exitoso', 'role' => $user['role']];
             }else{
                 $this->data = ['status' => 'error', 'message' => 'Contraseña incorrecta'];
