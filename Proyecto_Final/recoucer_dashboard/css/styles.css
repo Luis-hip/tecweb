@@ -1,4 +1,22 @@
-body { min-height: 100vh; }
-.card { box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
-.card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-canvas { max-height: 250px; }
+body { 
+    min-height: 100vh; 
+    background-color: #f0f2f5;
+}
+
+.card { 
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    transition: all 0.3s ease-in-out; 
+}
+
+.card:hover { 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transform: translateY(-10px) scale(1.02);
+    cursor: pointer;
+    z-index: 10;
+}
+
+canvas { 
+    max-height: 250px; 
+}

@@ -9,41 +9,111 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <a class="navbar-brand" href="#">ResourceHub Admin</a>
         <button class="btn btn-outline-danger ml-auto" id="logoutBtn">Salir</button>
     </nav>
     <div class="container-fluid mt-4">
         <div class="row mb-5">
-            <div class="col-md-4"><canvas id="chartFormat"></canvas></div>
-            <div class="col-md-4"><canvas id="chartLang"></canvas></div>
-            <div class="col-md-4"><canvas id="chartActivity"></canvas></div>
-        </div>
+            <div class="col-md-4">
+                <div class="card border-secondary mb-3 shadow-sm" style="height: 100%;">
+                    <div class="card-header text-center font-weight-bold text-uppercase bg-light">
+                        Recursos por Formato
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartFormat"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-secondary mb-3 shadow-sm" style="height: 100%;">
+                    <div class="card-header text-center font-weight-bold text-uppercase bg-light">
+                        Lenguajes
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartLang"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-secondary mb-3 shadow-sm" style="height: 100%;">
+                    <div class="card-header text-center font-weight-bold text-uppercase bg-light">
+                        Actividad Reciente
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartActivity"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>  
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Gestión</div>
+                <div class="card mb-4 shadow-sm"> <div class="card-header font-weight-bold text-uppercase bg-dark text-white">
+                        <i class="fa fa-edit"></i> Gestión de Recursos
+                    </div>
                     <div class="card-body">
                         <form id="resource-form">
                             <input type="hidden" id="resourceId">
-                            <div class="form-group"><input type="text" id="name" class="form-control" placeholder="Nombre" required></div>
-                            <div class="form-group"><textarea id="description" class="form-control" placeholder="Descripción"></textarea></div>
-                            <div class="form-group"><input type="text" id="url" class="form-control" placeholder="URL" required></div>
-                            <div class="row">
-                                <div class="col"><input type="text" id="format" class="form-control" placeholder="Formato" required></div>
-                                <div class="col"><input type="text" id="language" class="form-control" placeholder="Lenguaje" required></div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Nombre</label>
+                                <input type="text" id="name" class="form-control" placeholder="Ej: Curso de PHP" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mt-3">Guardar</button>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Descripción</label>
+                                <textarea id="description" class="form-control" rows="3" placeholder="Breve descripción..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">URL</label>
+                                <input type="text" id="url" class="form-control" placeholder="https://..." required>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" id="format" class="form-control" placeholder="Formato (PDF, Video)" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="language" class="form-control" placeholder="Lenguaje (JS, PHP)" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-4 font-weight-bold">
+                                GUARDAR RECURSO
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-8">
-                <input type="text" id="search" class="form-control mb-3" placeholder="Buscar...">
-                <table class="table table-hover">
-                    <thead><tr><th>ID</th><th>Nombre</th><th>Lenguaje</th><th>Acción</th></tr></thead>
-                    <tbody id="resources-table"></tbody>
-                </table>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header font-weight-bold text-uppercase bg-white d-flex justify-content-between align-items-center">
+                        <span>Lista de Recursos</span>
+                        <span class="badge badge-primary">Base de Datos</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light border-0">🔍</span>
+                            </div>
+                            <input type="text" id="search" class="form-control bg-light border-0" placeholder="Buscar por nombre, lenguaje o descripción...">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Lenguaje</th>
+                                        <th class="text-center" style="width: 150px;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resources-table">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
