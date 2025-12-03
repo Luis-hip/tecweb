@@ -37,26 +37,44 @@ $(document).ready(function() {
     const userEmail = localStorage.getItem('user_email');
     const userRole = localStorage.getItem('user_role');
     
+    // Si existe un email guardado, mostrar el menu de usuario
     if(userEmail) {
         //Variable para guardar el boton admin (por defecto vacio)
         let adminButton = '';
 
         //Si el rol es admin, agregamos el boton de dashboard
         if (userRole === 'admin') {
-            adminButton = '<a class="dropdown-item font-weight-bold text-primary" href="dashboard.html">Ir al Dashboard</a><div class="dropdown-divider"></div>';
+            adminButton = `
+                <a class="dropdown-item py-2 text-primary font-weight-bold" href="dashboard.html">
+                    ⚙️ Panel de Control
+                </a>
+                <div class="dropdown-divider"></div>
+            `;
         }
         
         //si existe el email, buscamos el enlace de iniciar sesion y lo reemplazamos por el menu de usuario
         // Insertamos el menú con la variable adminButton incluida
         $('#nav-auth').html(`
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ${userEmail}
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    👤 Mi Cuenta
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    ${adminButton}
+                
+                <div class="dropdown-menu dropdown-menu-right custom-user-menu" aria-labelledby="userDropdown">
                     
-                    <a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a>
+                    <div class="px-4 py-3 bg-light border-bottom">
+                        <span class="d-block small text-uppercase text-muted font-weight-bold" style="font-size: 10px;">Conectado como</span>
+                        <div class="text-dark font-weight-bold text-truncate" title="${userEmail}">
+                            ${userEmail}
+                        </div>
+                    </div>
+
+                    <div class="py-2">
+                        ${adminButton}
+                        <a class="dropdown-item py-2 text-danger" href="#" id="logoutBtn">
+                            🚪 Cerrar sesión
+                        </a>
+                    </div>
                 </div>
             </li>
         `);

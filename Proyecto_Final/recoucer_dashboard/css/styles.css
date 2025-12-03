@@ -20,3 +20,28 @@ body {
 canvas { 
     max-height: 250px; 
 }
+
+.custom-user-menu {
+    /* Lo que tenías en style="..." */
+    min-width: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+
+    /* Lo que tenías en clases de Bootstrap (shadow-lg, border-0, mt-2) */
+    border: none;             /* Reemplaza a border-0 */
+    margin-top: 0.5rem;       /* Reemplaza a mt-2 */
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175); /* Reemplaza a shadow-lg */
+}
+
+.nav-link.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+.btn-close-absolute {
+    top: 10px;
+    right: 15px;
+    padding: 0 8px;
+    border-radius: 25%;
+    /* Aseguramos que el tamaño de fuente y línea estén centrados */
+    line-height: 1.5; 
+}

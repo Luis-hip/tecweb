@@ -98,6 +98,11 @@ $(document).ready(function() {
     //Cerrar sesión
     $('#logoutBtn').click(function() {
         $.get('./backend/auth-logout.php', function() {
+            //Borramos los datos del navegador para evitar errores
+            localStorage.removeItem('user_email');
+            localStorage.removeItem('user_role');
+            
+            //Nos vamos al login o al inicio, ahora sí totalmente desconectados
             window.location.href = 'index.html';
         });
     });
