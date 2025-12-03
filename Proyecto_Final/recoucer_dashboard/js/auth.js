@@ -25,6 +25,8 @@ $(document).ready(function() {
                 if(r.status === 'success') {
                     //Guarda el email en el almacenamiento local
                     localStorage.setItem('user_email', r.email);
+                    //Guardamos el rol (admin/user)
+                    localStorage.setItem('user_role', r.role);
                     $('#auth-message').html('<div class="alert alert-success">Entrando...</div>');
                     //Redirigir segun el rol del usuario
                     setTimeout(() => window.location.href = r.role === 'admin' ? 'dashboard.html' : 'index.html', 1500);

@@ -1,7 +1,17 @@
 $(document).ready(function() {
     //Cargar Graficas
     $.get('./backend/stats-get.php', function(res) {
+        console.log("Respuesta del servidor:", res); // Depuración: muestra la respuesta del servidor en la consola
+
         const data = typeof res === 'string' ? JSON.parse(res) : res;
+        
+        // Si el backend dice "error" (porque no hay sesión), sacamos al usuario
+        if(data.status === 'error' || !data.by_format) {
+            alert("Tu sesión ha expirado. Por favor ingresa nuevamente.");
+            window.location.href = 'login.html';
+            return; // Detenemos el código aquí
+        }
+
         if(data.by_format){
             // Grafica de formatos de archivo
             new Chart(document.getElementById('chartFormat'), {

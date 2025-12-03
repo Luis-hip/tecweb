@@ -35,15 +35,27 @@ $(document).ready(function() {
     //
     //Verificar la sesion del usuario
     const userEmail = localStorage.getItem('user_email');
+    const userRole = localStorage.getItem('user_role');
     
     if(userEmail) {
-        //si eciste el email, buscamos el enlace de iniciar sesion y lo reemplazamos por el menu de usuario
+        //Variable para guardar el boton admin (por defecto vacio)
+        let adminButton = '';
+
+        //Si el rol es admin, agregamos el boton de dashboard
+        if (userRole === 'admin') {
+            adminButton = '<a class="dropdown-item font-weight-bold text-primary" href="dashboard.html">Ir al Dashboard</a><div class="dropdown-divider"></div>';
+        }
+        
+        //si existe el email, buscamos el enlace de iniciar sesion y lo reemplazamos por el menu de usuario
+        // Insertamos el menú con la variable adminButton incluida
         $('#nav-auth').html(`
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ${userEmail}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    ${adminButton}
+                    
                     <a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a>
                 </div>
             </li>
@@ -53,8 +65,9 @@ $(document).ready(function() {
         $('#logoutBtn').click(function(e) {
             e.preventDefault();
             $.get('./backend/auth-logout.php', function() {
-                // Borramos el dato del navegador y recargamos
+                // Borramos email Y ROL
                 localStorage.removeItem('user_email');
+                localStorage.removeItem('user_role');
                 window.location.reload();
             });
         });
