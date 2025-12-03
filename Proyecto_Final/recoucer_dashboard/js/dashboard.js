@@ -55,6 +55,31 @@ $(document).ready(function() {
     // Cargar recursos al iniciar
     fetchResources();
 
+    // Buscar recursos
+    $(document).on('input', '#search', function() {
+        let search = $('#search').val(); // Obtener el valor del campo de búsqueda
+        console.log("Búsqueda:", search); // Depuración: muestra el término de búsqueda en la consola
+        let url = search ? './backend/resource-search.php' : './backend/resource-list.php'; // Determinar la URL según si hay búsqueda o no
+        // Realizar la solicitud AJAX para obtener los recursos buscados o la lista completa
+        $.get(url, {search: search}, function(res) {
+            let tpl = '';
+            const data = typeof res === 'string' ? JSON.parse(res) : res; // Asegurarse de que res sea un objeto
+            // Construir la tabla con los datos recibidos
+            data.forEach(i => {
+                tpl += `<tr resourceId = "${i.id}">
+                    <td>${i.id}</td>
+                    <td>${i.nombre}</td>
+                    <td>${i.lenguaje}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning resource-edit">Editar</button>
+                        <button class="btn btn-sm btn-danger resource-delete">Eliminar</button>
+                    </td>
+                </tr>`;
+            });
+            $('#resources-table').html(tpl); // Actualizar la tabla con los nuevos datos
+        });
+    });
+
     // Enviar formulario de recurso (agregar/editar)
     $('#resource-form').submit(function(e) {
         e.preventDefault();
